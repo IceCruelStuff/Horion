@@ -10,7 +10,10 @@ ButtonInfo::ButtonInfo(int id, vec2_t pos, bool centered) : ComponentInfo(id), p
 
 void ButtonInfo::calculateSize(const char* txt) {
 	std::string str(txt);
-	this->size = {DrawUtils::getTextWidth(&str), DrawUtils::getFont(Fonts::SMOOTH)->getLineHeight()};
+	this->size = {
+		DrawUtils::getTextWidth(&str),
+		DrawUtils::getFont(Fonts::SMOOTH)->getLineHeight()
+	};
 }
 
 bool ButtonInfo::isInSelectableSurface(vec2_t mouse) {
@@ -20,15 +23,19 @@ bool ButtonInfo::isInSelectableSurface(vec2_t mouse) {
 
 vec4_t ButtonInfo::getSelectableSurface() {
 	if (centered) {
-		return {this->pos.x - padding - this->size.x / 2,
-				this->pos.y - padding - this->size.y / 2,
-				this->pos.x + padding + this->size.x / 2,
-				this->pos.y + padding + this->size.y / 2};
+		return {
+			this->pos.x - padding - this->size.x / 2,
+			this->pos.y - padding - this->size.y / 2,
+			this->pos.x + padding + this->size.x / 2,
+			this->pos.y + padding + this->size.y / 2
+		};
 	} else {
-		return {this->pos.x - padding,
-				this->pos.y - padding,
-				this->pos.x + padding + this->size.x,
-				this->pos.y + padding + this->size.y};
+		return {
+			this->pos.x - padding,
+			this->pos.y - padding,
+			this->pos.x + padding + this->size.x,
+			this->pos.y + padding + this->size.y
+		};
 	}
 }
 
