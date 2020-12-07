@@ -141,6 +141,7 @@ private:
 
 public:
 	virtual void setPos(vec3_t const &);
+	virtual vec3_t *getPredictedMovementValues(void) const;
 	virtual vec3_t *getPos(void) const;
 	virtual vec3_t *getPosOld(void) const;
 	virtual vec3_t *getPosExtrapolated(float) const;
@@ -151,6 +152,7 @@ private:
 
 public:
 	virtual void setRot(vec2_t const &);
+	virtual void move(class IActorMovementProxy &, vec3_t const &);
 	virtual void move(vec3_t const &);
 	virtual __int64 getInterpolatedRidingPosition(float) const;
 	virtual __int64 getInterpolatedBodyRot(float) const;
@@ -310,7 +312,7 @@ private:
 	virtual __int64 feed(int);
 	virtual __int64 handleEntityEvent(__int64, int);
 	virtual __int64 getPickRadius(void);
-	virtual const struct HashedString* getActorRendererId(void);
+	virtual const class HashedString* getActorRendererId(void);
 	virtual __int64 spawnAtLocation(int, int);
 	virtual __int64 spawnAtLocation(int, int, float);
 	virtual __int64 spawnAtLocation(__int64 const &, int);
@@ -365,9 +367,11 @@ private:
 	virtual __int64 handleInsidePortal(vec3_ti const &);
 	virtual __int64 getPortalCooldown(void) const;
 	virtual __int64 getPortalWaitTime(void) const;
-	virtual __int64 getDimensionId(void) const;
 
 public:
+	virtual int* getDimensionId(int* dimOut) const;
+
+
 	virtual bool canChangeDimensions(void) const;
 
 private:
@@ -731,7 +735,6 @@ private:
 public:
 	virtual void setPermissions(int);
 
-private:
 	virtual __int64 startDestroying(void);
 	virtual __int64 stopDestroying(void);
 
