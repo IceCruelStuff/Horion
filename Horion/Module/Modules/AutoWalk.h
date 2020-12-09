@@ -9,6 +9,6 @@ public:
 	AutoWalk();
 	~AutoWalk();
 
-	virtual void onTick(C_GameMode* gm) override;
+	virtual void onMove(C_MoveInputHandler* input) override;
 	virtual const char* getModuleName() override;
 };
