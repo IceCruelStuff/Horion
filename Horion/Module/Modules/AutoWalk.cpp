@@ -11,8 +11,9 @@ const char* AutoWalk::getModuleName() {
 	return "AutoWalk";
 }
 
-void AutoWalk::onTick(C_GameMode* gm) {
-	float calcYaw = (gm->player->yaw + 90) * (PI / 180);
-	gm->player->velocity.x = cos(calcYaw) * speed;
-	gm->player->velocity.z = sin(calcYaw) * speed;
+void AutoWalk::onMove(C_MoveInputHandler* input) {
+	auto player = g_Data.getLocalPlayer();
+	float calcYaw = (player->yaw + 90) * (PI / 180);
+	player->velocity.x = cos(calcYaw) * speed;
+	player->velocity.z = sin(calcYaw) * speed;
 }
