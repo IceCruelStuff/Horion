@@ -22,7 +22,7 @@ private:
 public:
 	C_ItemRenderer* renderer;  //0x0058
 private:
-	char pad_0x50[0x228];  //0x60
+	char pad_0x50[0x238];  //0x60
 public:
 	C_BaseActorRenderContext(C_ScreenContext* ScreenCtx, C_ClientInstance* client, MinecraftGame* game);
 };
@@ -34,6 +34,31 @@ public:
 };
 
 class C_Item {
+
+	
+private:
+	char pad_0028[136];     //0x0028
+public:
+	int16_t maxStackSize;   //0x0090
+	int16_t itemId;         //0x0092
+private:
+	char pad_0094[4];       //0x0094
+public:
+	TextHolder tileName;    //0x0098
+private:
+	char pad_00B8[8];       //0x00B8
+public:
+	TextHolder name;        //0x00C0
+private:
+	char pad_00E0[8];       //0x00E0
+public:
+	TextHolder isFrom;		//0x00E8
+private:
+	char pad_0108[80];      //0x0108
+public:
+	int16_t duration;       //0x0158
+
+/*
 private:
 	char pad_0x0008[0x62];  //0x8
 public:
@@ -46,7 +71,7 @@ public:
 private:
 	char pad_0x0B8[0x4C];  //0xB0
 public:
-	int duration;  //0xFC
+	int duration;  //0xFC*/
 private:
 	virtual __int64 destructor();
 	virtual __int64 tearDown(void);
@@ -233,7 +258,7 @@ public:
 		return false;
 	}
 	bool isBlock(void) {
-		auto val = *reinterpret_cast<__int64***>(reinterpret_cast<__int64>(this) + 0x170);
+		auto val = *reinterpret_cast<__int64***>(reinterpret_cast<__int64>(this) + 0x1D0);
 		return val != nullptr && *val != nullptr;
 	}
 };

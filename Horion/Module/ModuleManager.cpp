@@ -84,7 +84,7 @@ void ModuleManager::initModules() {
 		this->moduleList.push_back(std::shared_ptr<IModule>(new Timer()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new NightMode()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new NoSwing()));
-		this->moduleList.push_back(std::shared_ptr<IModule>(new CubeGlide()));
+		//this->moduleList.push_back(std::shared_ptr<IModule>(new CubeGlide()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new AirStuck()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new Zoom()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new Teams()));
@@ -101,7 +101,7 @@ void ModuleManager::initModules() {
 		this->moduleList.push_back(std::shared_ptr<IModule>(new	Compass()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new	Radar()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new VanillaPlus()));
-
+		this->moduleList.push_back(std::shared_ptr<IModule>(new Twerk()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new FollowPathModule()));
 
 #ifdef _DEBUG

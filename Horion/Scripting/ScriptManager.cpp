@@ -107,7 +107,22 @@ void ScriptManager::prepareLocalPlayerPrototype(JsValueRef proto, ContextObjects
 	chakra.defineFunction(proto, L"setViewAngles", LocalPlayerFunctions::setViewAngles, objs);
 	chakra.defineFunction(proto, L"setIsOnGround", LocalPlayerFunctions::setIsOnGround, objs);
 	chakra.defineFunction(proto, L"getInventory", LocalPlayerFunctions::getInventory, objs);
-	chakra.defineFunction(proto, L"getInventorySlot", LocalPlayerFunctions::getInventorySlot, objs);
+
+	chakra.defineFunction(proto, L"placeBlock", LocalPlayerFunctions::placeBlock, objs);
+	chakra.defineFunction(proto, L"placeBlockRelative", LocalPlayerFunctions::placeBlockRelativeToPlr, objs);
+	chakra.defineFunction(proto, L"breakBlock", LocalPlayerFunctions::breakBlock, objs);
+	chakra.defineFunction(proto, L"breakBlockRelative", LocalPlayerFunctions::breakBlockRelativeToPlr, objs);
+}
+
+void ScriptManager::prepareInventoryFunctions(JsValueRef proto, ContextObjects* objs) {
+	chakra.defineFunction(proto, L"getItems", InventoryFunctions::getItems, objs);
+	chakra.defineFunction(proto, L"getArmor", InventoryFunctions::getArmor, objs);
+	chakra.defineFunction(proto, L"getHeld", InventoryFunctions::getHeld, objs);
+	chakra.defineFunction(proto, L"getSlot", InventoryFunctions::getSlot, objs);
+	chakra.defineFunction(proto, L"setSelected", InventoryFunctions::setSelected, objs);
+	chakra.defineFunction(proto, L"moveItem", InventoryFunctions::moveItem, objs);
+
+	chakra.defineProp(proto, L"isFull", InventoryFunctions::isFull, 0);
 }
 
 void ScriptManager::prepareGameFunctions(JsValueRef global, ContextObjects* objs) {
@@ -218,6 +233,10 @@ void ScriptManager::prepareContext(JsContextRef* ctx, ContextObjects* obj) {
 	chakra.JsCreateObject_(&obj->localPlayerPrototype);
 	chakra.JsAddRef_(obj->localPlayerPrototype, 0);
 	prepareLocalPlayerPrototype(obj->localPlayerPrototype, obj);
+
+	chakra.JsCreateObject_(&obj->inventoryObject);
+	chakra.JsAddRef_(obj->inventoryObject, 0);
+	prepareInventoryFunctions(obj->inventoryObject, obj);
 }
 
 JsValueRef ScriptManager::prepareVector3(vec3_t vec, ContextObjects* objs) {
@@ -325,6 +344,7 @@ void ScriptManager::prepareLevelFunctions(JsValueRef global, ContextObjects* obj
 	chakra.defineFunction(objs->levelObject, L"isValid", LevelFunctions::isValid, objs);
 	chakra.defineFunction(objs->levelObject, L"getAllEntities", LevelFunctions::getAllEntities, objs);
 	chakra.defineFunction(objs->levelObject, L"getAllTargetEntities", LevelFunctions::getAllTargetEntities, objs);
+	chakra.defineFunction(objs->levelObject, L"getBlock", LevelFunctions::getBlock, objs);
 }
 
 JsValueRef ScriptManager::getLocalPlayer(ContextObjects* obs) {
